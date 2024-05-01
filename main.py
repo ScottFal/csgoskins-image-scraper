@@ -7,7 +7,7 @@ import re
 
 pagesAvailable = 212
 
-def fetch_sticker_images(url, pages, output_folder="Complete sticker collection"):
+def fetch_sticker_images(url, pages, output_folder="Complete collection"):
     # Ensure output folder exists
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
