@@ -1,2 +1,2 @@
-# csgoskins-sticker-scraper
-download all available stickers from csgoskins.gg
+# csgoskins-image-scraper
+download all available stickers and every image from csgoskins.gg
