@@ -7,6 +7,7 @@ import re
 
 pagesAvailable = 212
 
+
 def fetch_sticker_images(url, pages, output_folder="Complete collection"):
     # Ensure output folder exists
     if not os.path.exists(output_folder):
@@ -35,14 +36,14 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
             # Loop through sticker divs to find image URLs and save them
             for index, sticker_div in enumerate(sticker_divs, 1):
                 image_url = sticker_div.find("img")["src"]
-                sticker_name_span = sticker_div.find("span", class_="block text-lg leading-7 truncate")
-                sticker_name = sticker_name_span.text.strip()
+                item_name_span = sticker_div.find("span", class_="block text-lg leading-7 truncate")
+                item_name = item_name_span.text.strip()
                 collection_span = sticker_div.find("span", class_="block text-gray-400 text-sm truncate")
                 collection_name = collection_span.text.strip()
                 # Remove special characters from the sticker name and collection name
-                sticker_name = re.sub(r'[^\w\s]', '', sticker_name)
+                item_name = re.sub(r'[^\w\s]', '', item_name)
                 collection_name = re.sub(r'[^\w\s]', '', collection_name)
-                image_name = f"{collection_name} - {sticker_name}.png"
+                image_name = f"{collection_name} - {item_name}.png"
                 collection_folder = os.path.join(output_folder, collection_name)
                 if not os.path.exists(collection_folder):
                     os.makedirs(collection_folder)
@@ -52,7 +53,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
                 if os.path.exists(image_path) and os.path.getsize(image_path) > 0:
                     skipped_count += 1
                     total_skipped_count += 1
-                    print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}", end='', flush=True)
+                    print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, {collection_name} - {item_name}                                        ", end='', flush=True)
                     continue
 
                 # Download the image
@@ -62,7 +63,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
                         f.write(image_content)
                         downloaded_count += 1
                         total_downloaded_count += 1
-                        print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}", end='', flush=True)
+                        print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, {collection_name} - {item_name}                                        ", end='', flush=True)
                     else:
                         print(f"\rFailed to download {image_name}, skipping", end='', flush=True)
 
@@ -70,6 +71,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
             print(f"\rFailed to fetch page {page_num}. Status code: {response.status_code}")
 
     print("\nAll images downloaded.")
+
 
 if __name__ == "__main__":
     base_url = "https://csgoskins.gg/"
