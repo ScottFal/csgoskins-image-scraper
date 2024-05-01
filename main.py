@@ -22,7 +22,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
     for page_num in range(1, pages + 1):
         time.sleep(2)
         page_url = f"{url}?page={page_num}"
-        print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}", end='', flush=True)
+        print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, Total: {total_downloaded_count + total_skipped_count}", end='', flush=True)
 
         # Fetch the page content
         response = requests.get(page_url, headers=headers)
@@ -53,7 +53,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
                 if os.path.exists(image_path) and os.path.getsize(image_path) > 0:
                     skipped_count += 1
                     total_skipped_count += 1
-                    print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, {collection_name} - {item_name}                                        ", end='', flush=True)
+                    print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, Total: {total_downloaded_count + total_skipped_count}", end='', flush=True)
                     continue
 
                 # Download the image
@@ -63,7 +63,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete collection"):
                         f.write(image_content)
                         downloaded_count += 1
                         total_downloaded_count += 1
-                        print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, {collection_name} - {item_name}                                        ", end='', flush=True)
+                        print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}, Total: {total_downloaded_count + total_skipped_count}", end='', flush=True)
                     else:
                         print(f"\rFailed to download {image_name}, skipping", end='', flush=True)
 
