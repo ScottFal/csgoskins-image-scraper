@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import os
 import re
 
-pageNumber = 153
+pagesAvailable = 212
 
 def fetch_sticker_images(url, pages, output_folder="Complete sticker collection"):
     # Ensure output folder exists
@@ -72,5 +72,5 @@ def fetch_sticker_images(url, pages, output_folder="Complete sticker collection"
     print("\nAll images downloaded.")
 
 if __name__ == "__main__":
-    base_url = "https://csgoskins.gg/categories/sticker"
-    fetch_sticker_images(base_url, pageNumber)
+    base_url = "https://csgoskins.gg/"
+    fetch_sticker_images(base_url, pagesAvailable)
