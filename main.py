@@ -1,3 +1,5 @@
+import time
+
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -17,6 +19,7 @@ def fetch_sticker_images(url, pages, output_folder="Complete sticker collection"
     total_skipped_count = 0
 
     for page_num in range(1, pages + 1):
+        time.sleep(2)
         page_url = f"{url}?page={page_num}"
         print(f"\rPage: {page_num}/{pages}, Downloaded: {total_downloaded_count}, Skipped: {total_skipped_count}", end='', flush=True)
 
